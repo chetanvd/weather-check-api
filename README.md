@@ -107,7 +107,7 @@ curl --location 'http://localhost:7500/mumzworld/users' \
 --header 'Authorization: Bearer <your-jwt-token>' \
 --header 'Content-Type: application/json' \
 --data '{
-\"username\": \"chetand\"
+  "username": "chetand"
 }'
 ```
 
@@ -147,8 +147,8 @@ curl --location 'http://localhost:7500/mumzworld/locations' \
 --header 'Authorization: Bearer <your-jwt-token>' \
 --header 'Content-Type: application/json' \
 --data '{
-\"title\": \"india\",
-\"userId\": 1
+  "title": "india",
+  "userId": 1
 }'
 ```
 
