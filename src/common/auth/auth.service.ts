@@ -11,7 +11,7 @@ export class AuthService {
 
   generateJwt(payload: object): string {
     const token: string = this.jwtService.sign(payload, {
-      secret: this.configService.get<string>('service.jwtSecret'),
+      secret: this.configService.get<string>('service.jwt.secret'),
       algorithm: 'HS256',
       expiresIn: '60m',
     });

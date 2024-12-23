@@ -3,7 +3,11 @@ export default () => ({
   env: process.env.NODE_ENV,
   service: {
     name: 'MUMZWORLD-TEST',
-    jwtSecret: process.env.JWT_SECRET,
+    jwt: {
+      secret: process.env.JWT_SECRET,
+      apiUsername: process.env.JWT_API_USERNAME,
+      apiPassword: process.env.JWT_API_PASSWORD,
+    },
     database: {
       type: process.env.DB_TYPE,
       host: process.env.DB_HOST,

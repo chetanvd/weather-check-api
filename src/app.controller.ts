@@ -6,14 +6,16 @@ import {
   Request,
 } from '@nestjs/common';
 import { AppService } from './app.service';
-import { SkipAuth } from './common/decorators/skip-auth.decorator';
 import { AuthService } from './common/auth/auth.service';
+import { ConfigService } from '@nestjs/config';
 
 @Controller()
 export class AppController {
   constructor(
     private readonly appService: AppService,
     private authService: AuthService,
+
+    private readonly configService: ConfigService,
   ) {}
 
   @Get()
@@ -22,8 +24,15 @@ export class AppController {
   }
 
   @Post('/generate/jwt')
-  @SkipAuth()
-  generateJwt(): object {
+  generateJwt(@Request() req): object {
+    if (
+      req.headers?.username !==
+        this.configService.get<string>('service.jwt.apiUsername') ||
+      req.headers?.password !==
+        this.configService.get<string>('service.jwt.apiPassword')
+    ) {
+      throw new BadRequestException('Invalid Admin Credentials !');
+    }
     const response = this.authService.generateJwt({
       message: 'testing',
     });

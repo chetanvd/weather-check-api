@@ -37,7 +37,7 @@ export class AuthGuard implements CanActivate {
 
     try {
       const options: object = {
-        secret: this.configService.get<string>('service.jwtSecret'),
+        secret: this.configService.get<string>('service.jwt.secret'),
         algorithms: ['HS256'],
       };
 

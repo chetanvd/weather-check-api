@@ -174,7 +174,13 @@ curl --location 'http://localhost:7500/mumzworld/\_health'
 Generates a new JWT token.
 
 ```bash
-curl --location --request POST 'http://localhost:7500/mumzworld/generate/jwt'
+curl --location 'http://localhost:7500/mumzworld/generate/jwt' \
+--header 'username: mumzworld' \
+--header 'password: mumzworld@123' \
+--header 'Content-Type: application/json' \
+--data '{
+    "Message": "Mumzworlf Home Test"
+}'
 ```
 
 ## Explanation of caching strategy
