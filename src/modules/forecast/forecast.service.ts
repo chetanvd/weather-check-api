@@ -16,7 +16,7 @@ export class ForecastService {
     const forecast = await this.cacheManager.get<string>(`${city}_forecast`);
 
     if (forecast) {
-      return JSON.parse(forecast)
+      return JSON.parse(forecast);
     }
 
     const apiUrl = `${this.configService.get<string>('weatherApp.url')}/v1/forecast.json`;
@@ -33,8 +33,15 @@ export class ForecastService {
     await this.cacheManager.set(
       `${city}_forecast`,
       JSON.stringify(response),
-      1440 * 60 * 1000,
+      this.getMillisecondsUntilEndOfDay(),
     );
     return response;
+  }
+
+  getMillisecondsUntilEndOfDay() {
+    const now = new Date();
+    const endOfDay = new Date(now);
+    endOfDay.setHours(23, 59, 59, 999);
+    return endOfDay.getTime() - now.getTime();
   }
 }
