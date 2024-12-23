@@ -182,10 +182,11 @@ curl --location --request POST 'http://localhost:7500/mumzworld/generate/jwt'
 ### 1. Current Weather Caching
 
 The Current Weather API fetches real-time weather data for a location. Since weather conditions can change frequently, we implement a short-lived cache for this data. However, the cache doesn't need to be refreshed on every request—this avoids excessive API calls to the external weather service.
-Key Aspects:
 
-    Cache Duration: The cache duration is set based on the end of the current hour using the getMillisecondsUntilEndOfHour() function. This ensures that weather data is refreshed at the end of each hour, reducing the number of calls to the weather service while ensuring relatively fresh data.
-    Cache Expiration: At the end of each hour, the cached weather data is invalidated, and a fresh API call is made to fetch the updated current weather data. This means that users will typically get updated data once every hour, although cache refresh happens based on the function's timing mechanism.
+#### Key Aspects:
+
+- Cache Duration: The cache duration is set based on the end of the current hour using the getMillisecondsUntilEndOfHour() function. This ensures that weather data is refreshed at the end of each hour, reducing the number of calls to the weather service while ensuring relatively fresh data.
+- Cache Expiration: At the end of each hour, the cached weather data is invalidated, and a fresh API call is made to fetch the updated current weather data. This means that users will typically get updated data once every hour, although cache refresh happens based on the function's timing mechanism.
 
 Example:
 
@@ -194,10 +195,11 @@ If a request for the current weather is made at 12:15 PM, the cache will expire 
 ### 2. Forecast Caching
 
 The Forecast API provides weather predictions for the future (e.g., hourly or daily forecasts). Since forecasts don’t change drastically from one moment to the next (especially for short-term predictions), the data can be cached for a longer period compared to current weather.
-Key Aspects:
 
-    Cache Duration: The forecast data is cached based on the end of the current day using the getMillisecondsUntilEndOfDay() function. This ensures that forecast data is refreshed once per day, but not more frequently unless necessary.
-    Cache Expiration: After a full day (i.e., at midnight), the cached forecast data is invalidated, and a new API call is made to fetch the updated forecast for the next day.
+#### Key Aspects:
+
+- Cache Duration: The forecast data is cached based on the end of the current day using the getMillisecondsUntilEndOfDay() function. This ensures that forecast data is refreshed once per day, but not more frequently unless necessary.
+- Cache Expiration: After a full day (i.e., at midnight), the cached forecast data is invalidated, and a new API call is made to fetch the updated forecast for the next day.
 
 Example:
 
