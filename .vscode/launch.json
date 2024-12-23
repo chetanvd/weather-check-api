@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    
+
+    {
+      "name": "Mumzworld NestJS",
+      "type": "node",
+      "request": "launch",
+      "runtimeVersion": "20",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start:dev"],
+      "restart": true,
+      "timeout": 30000,
+      "outputCapture": "std",
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}
