@@ -68,7 +68,7 @@ $ npm run test:cov
 
 Fetches the current weather data for India.
 
-\`\`\`bash
+````bash
 curl --location 'http://localhost:7500/mumzworld/weather/india'
 \```
 
@@ -76,7 +76,7 @@ curl --location 'http://localhost:7500/mumzworld/weather/india'
 
 Fetches the weather forecast for Australia.
 
-\`\`\`bash
+```bash
 curl --location 'http://localhost:7500/mumzworld/forecast/aus'
 \```
 
@@ -84,7 +84,7 @@ curl --location 'http://localhost:7500/mumzworld/forecast/aus'
 
 Fetches all users.
 
-\`\`\`bash
+```bash
 curl --location 'http://localhost:7500/mumzworld/users' \
 --header 'Authorization: Bearer <your-jwt-token>'
 \```
@@ -93,7 +93,7 @@ curl --location 'http://localhost:7500/mumzworld/users' \
 
 Fetch a user by their user ID.
 
-\`\`\`bash
+```bash
 curl --location 'http://localhost:7500/mumzworld/users/1' \
 --header 'Authorization: Bearer <your-jwt-token>'
 \```
@@ -102,7 +102,7 @@ curl --location 'http://localhost:7500/mumzworld/users/1' \
 
 Creates a new user with a given username.
 
-\`\`\`bash
+```bash
 curl --location 'http://localhost:7500/mumzworld/users' \
 --header 'Authorization: Bearer <your-jwt-token>' \
 --header 'Content-Type: application/json' \
@@ -115,7 +115,7 @@ curl --location 'http://localhost:7500/mumzworld/users' \
 
 Fetches all locations.
 
-\`\`\`bash
+```bash
 curl --location 'http://localhost:7500/mumzworld/locations' \
 --header 'Authorization: Bearer <your-jwt-token>'
 \```
@@ -124,7 +124,7 @@ curl --location 'http://localhost:7500/mumzworld/locations' \
 
 Fetch a location by its ID.
 
-\`\`\`bash
+```bash
 curl --location 'http://localhost:7500/mumzworld/locations/1' \
 --header 'Authorization: Bearer <your-jwt-token>'
 \```
@@ -133,7 +133,7 @@ curl --location 'http://localhost:7500/mumzworld/locations/1' \
 
 Fetches all locations associated with a specific user.
 
-\`\`\`bash
+```bash
 curl --location 'http://localhost:7500/mumzworld/locations/user/1' \
 --header 'Authorization: Bearer <your-jwt-token>'
 \```
@@ -142,7 +142,7 @@ curl --location 'http://localhost:7500/mumzworld/locations/user/1' \
 
 Creates a new location with the given title and user ID.
 
-\`\`\`bash
+```bash
 curl --location 'http://localhost:7500/mumzworld/locations' \
 --header 'Authorization: Bearer <your-jwt-token>' \
 --header 'Content-Type: application/json' \
@@ -156,7 +156,7 @@ curl --location 'http://localhost:7500/mumzworld/locations' \
 
 Deletes a location by its ID.
 
-\`\`\`bash
+```bash
 curl --location --request DELETE 'http://localhost:7500/mumzworld/locations/1' \
 --header 'Authorization: Bearer <your-jwt-token>'
 \```
@@ -165,7 +165,7 @@ curl --location --request DELETE 'http://localhost:7500/mumzworld/locations/1' \
 
 Checks the health status of the application.
 
-\`\`\`bash
+```bash
 curl --location 'http://localhost:7500/mumzworld/\_health'
 \```
 
@@ -173,6 +173,7 @@ curl --location 'http://localhost:7500/mumzworld/\_health'
 
 Generates a new JWT token.
 
-\`\`\`bash
+```bash
 curl --location --request POST 'http://localhost:7500/mumzworld/generate/jwt'
 \```
+````
