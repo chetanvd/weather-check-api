@@ -57,10 +57,12 @@ describe('ForecastService', () => {
     const city = 'London';
     const mockForecast = { city, forecast: 'Sunny' };
 
+    // Mock the cache to return a cached forecast
     jest.spyOn(cacheManager, 'get').mockResolvedValueOnce(JSON.stringify(mockForecast));
 
     const result = await service.fetchForecast(city);
 
+    // Ensure cache is queried for the forecast
     expect(cacheManager.get).toHaveBeenCalledWith(`${city}_forecast`);
     expect(result).toEqual(mockForecast);
   });
@@ -69,12 +71,20 @@ describe('ForecastService', () => {
     const city = 'London';
     const mockResponse = { city, forecast: 'Rainy' };
 
+    // Mock cache to return null (i.e., no cached forecast)
     jest.spyOn(cacheManager, 'get').mockResolvedValueOnce(null);
+    // Mock the HTTP helper to return a forecast response
     jest.spyOn(httpHelper, 'get').mockResolvedValueOnce(mockResponse);
+    // Mock the cache set operation
     jest.spyOn(cacheManager, 'set').mockResolvedValueOnce(null);
+
+    // Mock the getMillisecondsUntilEndOfDay function to return TTL in milliseconds
+    const ttl = 1440 * 60 * 1000; // 24 hours in milliseconds
+    jest.spyOn(service, 'getMillisecondsUntilEndOfDay').mockReturnValueOnce(ttl);
 
     const result = await service.fetchForecast(city);
 
+    // Ensure cache and API interactions are as expected
     expect(cacheManager.get).toHaveBeenCalledWith(`${city}_forecast`);
     expect(httpHelper.get).toHaveBeenCalledWith(
       'https://api.weatherapi.com/v1/forecast.json',
@@ -89,7 +99,44 @@ describe('ForecastService', () => {
     expect(cacheManager.set).toHaveBeenCalledWith(
       `${city}_forecast`,
       JSON.stringify(mockResponse),
-      1440 * 60 * 1000, // TTL in milliseconds
+      ttl,
+    );
+    expect(result).toEqual(mockResponse);
+  });
+
+  it('should handle cache miss gracefully', async () => {
+    const city = 'London';
+    const mockResponse = { city, forecast: 'Cloudy' };
+
+    // Simulate a cache miss (no cached forecast)
+    jest.spyOn(cacheManager, 'get').mockResolvedValueOnce(null);
+    // Mock the HTTP response
+    jest.spyOn(httpHelper, 'get').mockResolvedValueOnce(mockResponse);
+    // Mock the cache set
+    jest.spyOn(cacheManager, 'set').mockResolvedValueOnce(null);
+
+    // Mock the TTL value
+    const ttl = 1440 * 60 * 1000; // 24 hours in milliseconds
+    jest.spyOn(service, 'getMillisecondsUntilEndOfDay').mockReturnValueOnce(ttl);
+
+    const result = await service.fetchForecast(city);
+
+    // Ensure cache set with the correct TTL value
+    expect(cacheManager.get).toHaveBeenCalledWith(`${city}_forecast`);
+    expect(httpHelper.get).toHaveBeenCalledWith(
+      'https://api.weatherapi.com/v1/forecast.json',
+      {
+        params: {
+          q: city.trim(),
+          key: 'mock-api-key',
+          days: 5,
+        },
+      },
+    );
+    expect(cacheManager.set).toHaveBeenCalledWith(
+      `${city}_forecast`,
+      JSON.stringify(mockResponse),
+      ttl,
     );
     expect(result).toEqual(mockResponse);
   });
