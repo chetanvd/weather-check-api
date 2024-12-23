@@ -68,9 +68,9 @@ $ npm run test:cov
 
 Fetches the current weather data for India.
 
-````bash
+```bash
 curl --location 'http://localhost:7500/mumzworld/weather/india'
-\```
+```
 
 ### 2. Get Forecast
 
@@ -78,7 +78,7 @@ Fetches the weather forecast for Australia.
 
 ```bash
 curl --location 'http://localhost:7500/mumzworld/forecast/aus'
-\```
+```
 
 ### 3. Get All Users
 
@@ -87,7 +87,7 @@ Fetches all users.
 ```bash
 curl --location 'http://localhost:7500/mumzworld/users' \
 --header 'Authorization: Bearer <your-jwt-token>'
-\```
+```
 
 ### 4. Get User by UserID
 
@@ -96,7 +96,7 @@ Fetch a user by their user ID.
 ```bash
 curl --location 'http://localhost:7500/mumzworld/users/1' \
 --header 'Authorization: Bearer <your-jwt-token>'
-\```
+```
 
 ### 5. Create User
 
@@ -109,7 +109,7 @@ curl --location 'http://localhost:7500/mumzworld/users' \
 --data '{
 \"username\": \"chetand\"
 }'
-\```
+```
 
 ### 6. Get All Locations
 
@@ -118,7 +118,7 @@ Fetches all locations.
 ```bash
 curl --location 'http://localhost:7500/mumzworld/locations' \
 --header 'Authorization: Bearer <your-jwt-token>'
-\```
+```
 
 ### 7. Get Location by ID
 
@@ -127,7 +127,7 @@ Fetch a location by its ID.
 ```bash
 curl --location 'http://localhost:7500/mumzworld/locations/1' \
 --header 'Authorization: Bearer <your-jwt-token>'
-\```
+```
 
 ### 8. Get Locations by UserID
 
@@ -136,7 +136,7 @@ Fetches all locations associated with a specific user.
 ```bash
 curl --location 'http://localhost:7500/mumzworld/locations/user/1' \
 --header 'Authorization: Bearer <your-jwt-token>'
-\```
+```
 
 ### 9. Create Location
 
@@ -150,7 +150,7 @@ curl --location 'http://localhost:7500/mumzworld/locations' \
 \"title\": \"india\",
 \"userId\": 1
 }'
-\```
+```
 
 ### 10. Delete Location
 
@@ -159,7 +159,7 @@ Deletes a location by its ID.
 ```bash
 curl --location --request DELETE 'http://localhost:7500/mumzworld/locations/1' \
 --header 'Authorization: Bearer <your-jwt-token>'
-\```
+```
 
 ### 11. Health API
 
@@ -167,7 +167,7 @@ Checks the health status of the application.
 
 ```bash
 curl --location 'http://localhost:7500/mumzworld/\_health'
-\```
+```
 
 ### 12. Generate JWT Token
 
@@ -175,5 +175,4 @@ Generates a new JWT token.
 
 ```bash
 curl --location --request POST 'http://localhost:7500/mumzworld/generate/jwt'
-\```
-````
+```
