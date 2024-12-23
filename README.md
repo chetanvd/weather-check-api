@@ -32,6 +32,10 @@
 $ npm install
 ```
 
+Create .env file in root of directory and copy paste the data from config/.default.env
+
+NOTE : make sure you replace respective values in .env
+
 ## Compile and run the project
 
 ```bash
